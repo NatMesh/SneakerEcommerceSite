@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_124611) do
+ActiveRecord::Schema.define(version: 2020_11_18_130344) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -68,6 +68,32 @@ ActiveRecord::Schema.define(version: 2020_11_18_124611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sneakers", force: :cascade do |t|
+    t.integer "brand_id", null: false
+    t.integer "category_id", null: false
+    t.integer "designer_id", null: false
+    t.string "main_colour"
+    t.string "colour_way"
+    t.string "gender"
+    t.text "grid_picture"
+    t.text "main_picture"
+    t.string "midsole"
+    t.string "name"
+    t.string "nickname"
+    t.string "release_date"
+    t.integer "price_cents"
+    t.text "shoe_story"
+    t.string "upper_material"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_sneakers_on_brand_id"
+    t.index ["category_id"], name: "index_sneakers_on_category_id"
+    t.index ["designer_id"], name: "index_sneakers_on_designer_id"
+  end
+
   add_foreign_key "customers", "provinces"
   add_foreign_key "orders", "customers"
+  add_foreign_key "sneakers", "brands"
+  add_foreign_key "sneakers", "categories"
+  add_foreign_key "sneakers", "designers"
 end
