@@ -9,7 +9,7 @@ Designer.delete_all
 
 
 #This gives us the full root path of our project along with the path for our json file with sneaker data
-filename = Rails.root.join("db/sneakers_dataset.json")
+filename = Rails.root.join("db/sneakers_dataset2.json")
 puts "Loading Sneakers from the JSON file: #{filename}"
 
 #grabs our json file to use
@@ -46,7 +46,7 @@ sneakers["sneakers"].each do |s|
       shoe_story:      s["story_html"],
       upper_material:  s["upper_material"]
     )
-    x = x + 1
+    #x = x + 1
     #this will let us know which record had issues being created if something goes wrong
     puts "Invalid sneaker #{s["name"]}" unless sneaker&.valid?
   else
@@ -60,5 +60,7 @@ end
 puts "Created #{Brand.count} Brands"
 puts "Created #{Designer.count} Designers"
 puts "Created #{Category.count} Categories"
-puts "Created #{x} sneakers"
+#puts "Created #{x} sneakers"
+
 puts "Created #{Sneaker.count} Sneakers"
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
