@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand: one
+  category: one
+  designer: one
+  main_colour: MyString
+  colour_way: MyString
+  gender: MyString
+  grid_picture: MyText
+  main_picture: MyText
+  midsole: MyString
+  name: MyString
+  nickname: MyString
+  release_date: MyString
+  price_cents: 1
+  shoe_story: MyText
+  upper_material: MyString
+
+two:
+  brand: two
+  category: two
+  designer: two
+  main_colour: MyString
+  colour_way: MyString
+  gender: MyString
+  grid_picture: MyText
+  main_picture: MyText
+  midsole: MyString
+  name: MyString
+  nickname: MyString
+  release_date: MyString
+  price_cents: 1
+  shoe_story: MyText
+  upper_material: MyString
