@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_110531) do
+ActiveRecord::Schema.define(version: 2020_11_18_114912) do
 
   create_table "customers", force: :cascade do |t|
     t.string "full_name"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 2020_11_18_110531) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.float "total_price"
+    t.string "shipping_address"
+    t.string "order_address"
+    t.string "order_email"
+    t.date "order_date"
+    t.string "order_status"
+    t.integer "stripe_order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string "name"
     t.float "provincial_sales_tax"
@@ -37,4 +51,5 @@ ActiveRecord::Schema.define(version: 2020_11_18_110531) do
   end
 
   add_foreign_key "customers", "provinces"
+  add_foreign_key "orders", "customers"
 end
