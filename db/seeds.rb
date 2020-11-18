@@ -6,6 +6,7 @@ Sneaker.delete_all
 Brand.delete_all
 Category.delete_all
 Designer.delete_all
+AdminUser.delete_all
 
 
 #This gives us the full root path of our project along with the path for our json file with sneaker data
@@ -61,6 +62,8 @@ puts "Created #{Brand.count} Brands"
 puts "Created #{Designer.count} Designers"
 puts "Created #{Category.count} Categories"
 #puts "Created #{x} sneakers"
-
 puts "Created #{Sneaker.count} Sneakers"
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
