@@ -10,7 +10,7 @@ AdminUser.delete_all
 
 
 #This gives us the full root path of our project along with the path for our json file with sneaker data
-filename = Rails.root.join("db/sneakers_dataset2.json")
+filename = Rails.root.join("db/sneakers_dataset.json")
 puts "Loading Sneakers from the JSON file: #{filename}"
 
 #grabs our json file to use
@@ -21,7 +21,7 @@ sneakers = JSON.parse(json_data)
 #test variable to use as counter in loop
 x = 0
 
-sneakers["sneakers"].each do |s|
+sneakers["sneakers"][0..9].each do |s|
   #Use by find_or_create_by() when dealing with models with unique validations over .create()
     #Best used when you have data that needs to be unique
   brand    = Brand.find_or_create_by(name: s["brand_name"])
@@ -49,7 +49,17 @@ sneakers["sneakers"].each do |s|
     )
     #x = x + 1
     #this will let us know which record had issues being created if something goes wrong
-    puts "Invalid sneaker #{s["name"]}" unless sneaker&.valid?
+    unless sneaker&.valid?
+      puts "Invalid sneaker #{s["name"]}"
+      next
+    end
+
+    #populate our size_range table and joiner table sneaker_size
+    size_ranges = s["size_range"]
+    size_ranges.each do |size_number|
+      size_number = SizeRange.find_or_create_by(size_number: size_number)
+    end
+
   else
     puts "Either invalid brand, designer or category"
     puts "Brand name: #{s["brand_name"]} for the #{s["name"]}"

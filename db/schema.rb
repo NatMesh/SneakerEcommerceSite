@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_201127) do
+ActiveRecord::Schema.define(version: 2020_11_24_190027) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -105,6 +105,21 @@ ActiveRecord::Schema.define(version: 2020_11_18_201127) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "size_ranges", force: :cascade do |t|
+    t.float "size_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sneaker_sizes", force: :cascade do |t|
+    t.integer "sneaker_id", null: false
+    t.integer "size_range_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["size_range_id"], name: "index_sneaker_sizes_on_size_range_id"
+    t.index ["sneaker_id"], name: "index_sneaker_sizes_on_sneaker_id"
+  end
+
   create_table "sneakers", force: :cascade do |t|
     t.integer "brand_id", null: false
     t.integer "category_id", null: false
@@ -132,6 +147,8 @@ ActiveRecord::Schema.define(version: 2020_11_18_201127) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "sneakers"
   add_foreign_key "orders", "customers"
+  add_foreign_key "sneaker_sizes", "size_ranges"
+  add_foreign_key "sneaker_sizes", "sneakers"
   add_foreign_key "sneakers", "brands"
   add_foreign_key "sneakers", "categories"
   add_foreign_key "sneakers", "designers"
