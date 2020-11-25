@@ -2,6 +2,8 @@
 require "json"
 
 #We delete Sneaker first as to avoid causing any orphan foreign key issues
+SneakerSize.delete_all
+SizeRange.delete_all
 Sneaker.delete_all
 Brand.delete_all
 Category.delete_all
@@ -21,7 +23,7 @@ sneakers = JSON.parse(json_data)
 #test variable to use as counter in loop
 x = 0
 
-sneakers["sneakers"][0..9].each do |s|
+sneakers["sneakers"].each do |s|
   #Use by find_or_create_by() when dealing with models with unique validations over .create()
     #Best used when you have data that needs to be unique
   brand    = Brand.find_or_create_by(name: s["brand_name"])
@@ -56,8 +58,11 @@ sneakers["sneakers"][0..9].each do |s|
 
     #populate our size_range table and joiner table sneaker_size
     size_ranges = s["size_range"]
-    size_ranges.each do |size_number|
-      size_number = SizeRange.find_or_create_by(size_number: size_number)
+    size_ranges.each do |sr|
+      #NOTE size ranges is the name of the table storing all of the possible shoe sizes
+      size_range = SizeRange.find_or_create_by(size_number: sr)
+      #NOTE SneakerSize is the name of the joiner table storing all the shoes matched with their available size
+      SneakerSize.create(sneaker: sneaker, size_range: size_range)
     end
 
   else
@@ -71,8 +76,11 @@ end
 puts "Created #{Brand.count} Brands"
 puts "Created #{Designer.count} Designers"
 puts "Created #{Category.count} Categories"
-#puts "Created #{x} sneakers"
 puts "Created #{Sneaker.count} Sneakers"
+#NOTE size ranges is the name of the table storing all of the possible shoe sizes
+puts "Created #{SizeRange.count} Size Ranges of possible shoe sizes"
+#joiner table of sneakers and sizeranges(available shoe sizes)
+puts "Created #{SneakerSize.count} Sneaker sizes based on what is available"
 
 if Rails.env.development?
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
