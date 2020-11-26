@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'brands/index'
+  get 'brands/show'
   get 'sneakers/index'
   get 'sneakers/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
