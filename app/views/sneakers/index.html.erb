@@ -1,9 +1,10 @@
-<h1>Shop</h1>
+
 <div class="row">
   <%# This will  the collection of active records, when asked to render it will look in the
   sneakers view folder to see if an partial exists, and if it does it exist rails will render that partial once
   for every single production company in our @sneakers collection.%>
   <%= render @sneakers %>
-  <%= paginate @sneakers%>
+
+  <div class="paginate_margin"><%= paginate @sneakers%></div>
 </div>
 
