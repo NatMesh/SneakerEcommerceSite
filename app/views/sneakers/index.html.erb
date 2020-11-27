@@ -1,2 +1,18 @@
-<h1>Sneakers#index</h1>
-<p>Find me in app/views/sneakers/index.html.erb</p>
+<h1>Shop</h1>
+<div class="row">
+  <% @sneakers.each do |sneaker|%>
+      <div class="col-sm-6 col-md-4 col-lg-3 set_border ">
+        <div><%= sneaker.release_date %></div>
+        <%# Sets the image as an additional link to the show page of the shoe %>
+        <a href="<%= sneaker_path(sneaker) %>"><img class="img-fluid" src="<%= sneaker.grid_picture %>" alt="<%= sneaker.name %>"></a>
+
+      </div>
+  <% end %>
+</div>
+
+
+<ul>
+  <% @sneakers.each do |sneaker|%>
+    <li><%= link_to sneaker.name, sneaker %> is a <%= sneaker.brand.name %> shoe.</li>
+  <% end %>
+</ul>
