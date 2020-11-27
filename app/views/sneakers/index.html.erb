@@ -1,14 +1,8 @@
 <h1>Shop</h1>
 <div class="row">
-  <% @sneakers.each do |sneaker|%>
-      <div class="col-sm-6 col-md-4 col-lg-3 set_border">
-        <p class="heavy"><%= sneaker.release_date %></p>
-
-        <a href="<%= sneaker_path(sneaker) %>"><img class="img-fluid" src="<%= sneaker.grid_picture %>" alt="<%= sneaker.name %>"></a>
-
-        <p class="center_text heavy"><%= sneaker.name %></p></a>
-        <p class="center_text heavy">$<%= (sneaker.price_cents / 100) %></p>
-      </div>
-  <% end %>
+  <%# This will  the collection of active records, when asked to render it will look in the
+  sneakers view folder to see if an partial exists, and if it does it exist rails will render that partial once
+  for every single production company in our @sneakers collection.%>
+  <%= render @sneakers %>
 </div>
 

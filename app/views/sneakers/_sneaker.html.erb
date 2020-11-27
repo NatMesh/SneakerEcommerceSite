@@ -1,0 +1,8 @@
+<div class="col-sm-6 col-md-4 col-lg-3 set_border">
+  <p class="heavy"><%= sneaker.release_date %></p>
+
+  <a href="<%= sneaker_path(sneaker) %>"><img class="img-fluid" src="<%= sneaker.grid_picture %>" alt="<%= sneaker.name %>"></a>
+
+  <p class="center_text heavy"><%= sneaker.name %></p></a>
+  <p class="center_text heavy">$<%= (sneaker.price_cents / 100) %></p>
+</div>
