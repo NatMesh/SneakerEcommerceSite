@@ -1,2 +1,33 @@
-<h1>Sneakers#show</h1>
-<img src="<%= @sneaker.main_picture %>" alt="<%= @sneaker.name %>">
+<div class="row show_page_margin">
+  <div class="col-sm-12  col-lg-8 ">
+    <img class="img-fluid" src="<%= @sneaker.main_picture %>" alt="<%= @sneaker.name %>">
+  </div>
+
+  <div class="col-sm-12 col-lg-4 ">
+    <h5><%= @sneaker.brand.name %></h5>
+    <h5><%= @sneaker.name %></h5>
+    <h5>$<%= @sneaker.price_cents / 100 %></h5>
+
+    <h5>Select US <%= @sneaker.gender %> size:</h5>
+    <form class="sneaker_size_form">
+      <select id="sneakerSizes" class="sneaker_size_select">
+        <% @sizes.each do |size|%>
+          <option value="<%= size.size_number %>"><%= size.size_number %></option>
+        <% end %>
+      </select>
+
+      <button type="submit" class="btn btn-primary my-1 sneaker_size_button">ADD TO CART</button>
+    </form>
+
+    <hr>
+
+    <h5>Details</h5>
+    <p><%= @sneaker.shoe_story %></p>
+
+    <p>Release Date: <%= @sneaker.release_date%></p>
+    <p>Nickname: <%= @sneaker.nickname%></p>
+    <p>Gender: <%= @sneaker.gender%></p>
+    <p>Colourway: <%= @sneaker.colour_way%></p>
+
+  </div>
+</div>

@@ -10,6 +10,8 @@ class SneakersController < ApplicationController
   def show
     #fetches us all the data for a particular sneaker based on the id
     @sneaker = Sneaker.find(params[:id])
+    #fetches us all the sizes available for a particular sneaker
+    @sizes = Sneaker.find(params[:id]).size_ranges.order("size_number ASC")
   end
   #The @sneaker variable will be shared with:
   #app/views/sneakers/show.html.erb
