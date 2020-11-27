@@ -2,7 +2,7 @@ class SneakersController < ApplicationController
   def index
     #This includes statement is very important as to avoid "N+1" errors when traversing models to retrieve data
     #Limits the amount of times we hit the database
-    @sneakers = Sneaker.includes(:brand, :designer, :category).order("price_cents DESC")
+    @sneakers = Sneaker.includes(:brand, :designer, :category).page params[:page]
   end
   #The @sneakers var will be shared with:
   #app/views/sneakers/index.html.erb
