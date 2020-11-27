@@ -1,2 +1,8 @@
-<h1>Categories#index</h1>
-<p>Find me in app/views/categories/index.html.erb</p>
+<h1>Categories</h1>
+<div class="row">
+  <% @categories.each do |category|%>
+      <div class="col-sm-6 col-md-4 col-lg-3 set_border">
+        <p class="center_text heavy"><%= link_to category.name, category%></p>
+      </div>
+  <% end %>
+</div>

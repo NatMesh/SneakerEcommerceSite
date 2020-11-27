@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'home/index'
+  root to: "home#index"
   resources :sneakers, only: %i[index show]
   resources :brands, only: %i[index show]
   resources :designers, only: %i[index show]
