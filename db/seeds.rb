@@ -2,6 +2,8 @@
 require "json"
 
 #We delete Sneaker first as to avoid causing any orphan foreign key issues
+Customer.delete_all
+Province.delete_all
 SneakerSize.delete_all
 SizeRange.delete_all
 Sneaker.delete_all
@@ -22,6 +24,103 @@ sneakers = JSON.parse(json_data)
 
 #test variable to use as counter in loop
 x = 0
+
+#Array of hashes with province information
+collection_of_provinces = [
+  {
+    "name": "Alberta",
+    "pst": 0,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "British Columbia",
+    "pst": 7,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "Manitoba",
+    "pst": 7,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "New Brunswick",
+    "pst": 0,
+    "gst": 0,
+    "hst": 15
+  },
+  {
+    "name": "Newfoundland and Labrador",
+    "pst": 0,
+    "gst": 0,
+    "hst": 15
+  },
+  {
+    "name": "Northwest Territories",
+    "pst": 0,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "Nova Scotia",
+    "pst": 0,
+    "gst": 0,
+    "hst": 15
+  },
+  {
+    "name": "Nunavut",
+    "pst": 0,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "Ontario",
+    "pst": 0,
+    "gst": 0,
+    "hst": 13
+  },
+  {
+    "name": "Prince Edward Island",
+    "pst": 0,
+    "gst": 0,
+    "hst": 15
+  },
+  {
+    "name": "Quebec",
+    "pst": 9975,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "Sasketchewan",
+    "pst": 6,
+    "gst": 5,
+    "hst": 0
+  },
+  {
+    "name": "Yukon",
+    "pst": 0,
+    "gst": 5,
+    "hst": 0
+  }
+]
+
+#populates our provinces table with data from collection_of_provinces
+collection_of_provinces.each do |p|
+  #
+  #puts "#{p}"
+  province = Province.create(
+    name:                   p[:name],
+    provincial_sales_tax:   p[:pst],
+    goods_and_services_tax: p[:gst],
+    harmonized_sales_tax:   p[:hst]
+  )
+  #helps show error handling
+  #province.errors.each { |attr, msg| puts "#{attr} - #{msg}\n" }
+
+end
 
 sneakers["sneakers"].each do |s|
   #Use by find_or_create_by() when dealing with models with unique validations over .create()
@@ -81,7 +180,7 @@ puts "Created #{Sneaker.count} Sneakers"
 puts "Created #{SizeRange.count} Size Ranges of possible shoe sizes"
 #joiner table of sneakers and sizeranges(available shoe sizes)
 puts "Created #{SneakerSize.count} Sneaker sizes based on what is available"
-
+puts "Created #{Province.count} provinces"
 if Rails.env.development?
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 end
