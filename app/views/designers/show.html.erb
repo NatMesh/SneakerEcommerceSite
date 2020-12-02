@@ -1,2 +1,8 @@
-<h1>Designers#show</h1>
-<p>Find me in app/views/designers/show.html.erb</p>
+<h1><%= @designer.name %> Shoes</h1>
+<div class="row">
+  <%# This will  the collection of active records, when asked to render it will look in the
+  sneakers view folder to see if an partial exists, and if it does it exist rails will render that partial once
+  for every single production company in our @sneakers collection.%>
+  <%= render @sneakers %>
+  <div class="paginate_margin"><%= paginate @sneakers%></div>
+</div>
