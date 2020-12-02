@@ -1,7 +1,7 @@
 <h1>Brands</h1>
 <div class="row">
   <% @brands.each do |brand|%>
-      <div class="col-sm-6 col-md-6 col-lg-4 set_border">
+      <div class="col-sm-6 col-md-4 col-lg-3 set_border">
         <% if brand.image.present? %>
           <%# Important syntax on how to apply a class to an image tag helper in rails %>
           <%# The class full simply sets img width to 100% of the column so it will fill it based on size of the
