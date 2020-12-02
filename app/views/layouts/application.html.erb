@@ -41,7 +41,7 @@
               <a class="nav-link" href="#">Contact</a>
             </li>
 
-            <% if  user_signed_in? %>
+            <% if  customer_signed_in? %>
               <li class="nav-item active">
                 <%# Important to note by default a link will preform get request but our sign out link is a delete
                 request which will delete our session variable. So we need to use the method attribute and declare
