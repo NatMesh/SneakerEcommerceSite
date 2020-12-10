@@ -39,3 +39,30 @@ body{
 .paginate_margin{
   margin-top: 20px;
 }
+
+sup {
+  background-color: #cc2020;
+  border-radius: 5px;
+  color: #fff;
+  font-size: xx-small;
+  font-weight: bold;
+  margin: 0.2rem;
+  padding: 0.2rem 0.3rem;
+  position: relative;
+  top: -2px;
+}
+
+.dropdown_menu_font_size{
+  font-size: 15px;
+}
+
+.dropdown-menu {
+  width: 400px;
+  border: transparent;
+  border: none;
+  border: black 1px solid;
+}
+
+.dropdown-item{
+  background-color: transparent !important;
+}

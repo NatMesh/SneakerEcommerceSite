@@ -12,16 +12,15 @@ class CartController < ApplicationController
     does_not_exists_in_session = true
 
     session[:shopping_cart].each do |item|
-      if item["id"] == id
+      if item["id"] == id && item["size"] == size
         item["quantity"] += 1
-        item["size"].push(size)
         does_not_exists_in_session = false
         break
       end
     end
 
     if does_not_exists_in_session
-      session[:shopping_cart] << {"id": id, "size": [].push(size), "quantity": 1}
+      session[:shopping_cart] << {"id": id, "size": size, "quantity": 1}
     end
 
     #session[:shopping_cart] << {"id": id, "size": size, "quantity": 1} unless session[:shopping_cart][][]
