@@ -8,12 +8,15 @@
     <h5><%= @sneaker.name %></h5>
     <h5>$<%= @sneaker.price_cents / 100 %></h5>
 
-    <h5>Select US <%= @sneaker.gender %> sizes:</h5>
 
     <%= form_with url: cart_index_path, method: :POST do %>
       <%= hidden_field_tag(:id, @sneaker.id)%>
 
+      <h5>Select US <%= @sneaker.gender %> sizes:</h5>
       <%= select_tag(:sneaker_size, options_from_collection_for_select(@sizes, "size_number", "size_number"), :class => "sneaker_size_select")%>
+
+      <h5>Select Quantity:</h5>
+      <%= number_field_tag 'quantity', '1', class: "sneaker_size_select", min: 1, max: 100 %>
 
       <%= button_tag('Add to Cart', :class => "btn btn-primary my-1 sneaker_size_button")%>
     <% end %>

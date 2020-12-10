@@ -6,21 +6,22 @@ class CartController < ApplicationController
     logger.debug("Adding #{params[:id]} and #{params[:sneaker_size]} to the cart")
     id = params[:id].to_i
     size = params[:sneaker_size].to_f
+    quantity = params[:quantity].to_i
     sneaker = Sneaker.find(id)
-    flash[:notice] = "#{sneaker.name} size #{size} was added to cart."
+    flash[:notice] = "#{quantity} #{sneaker.name} size #{size} were added to cart."
 
     does_not_exists_in_session = true
 
     session[:shopping_cart].each do |item|
       if item["id"] == id && item["size"] == size
-        item["quantity"] += 1
+        item["quantity"] += quantity
         does_not_exists_in_session = false
         break
       end
     end
 
     if does_not_exists_in_session
-      session[:shopping_cart] << {"id": id, "size": size, "quantity": 1}
+      session[:shopping_cart] << {"id": id, "size": size, "quantity": quantity}
     end
 
     #session[:shopping_cart] << {"id": id, "size": size, "quantity": 1} unless session[:shopping_cart][][]

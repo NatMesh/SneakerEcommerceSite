@@ -6,7 +6,7 @@
           <%# Important syntax on how to apply a class to an image tag helper in rails %>
           <%# The class full simply sets img width to 100% of the column so it will fill it based on size of the
           screen and grid. %>
-          <%= image_tag(brand.image, :class => "full")%>
+          <%= image_tag(brand.image, alt: brand.name,:class => "full")%>
         <% end %>
         <p class="center_text heavy"><%= link_to brand.name, brand%></p>
       </div>
