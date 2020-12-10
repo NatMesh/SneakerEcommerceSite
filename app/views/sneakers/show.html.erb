@@ -8,16 +8,29 @@
     <h5><%= @sneaker.name %></h5>
     <h5>$<%= @sneaker.price_cents / 100 %></h5>
 
-    <h5>Select US <%= @sneaker.gender %> size:</h5>
-    <form class="sneaker_size_form">
-      <select id="sneakerSizes" class="sneaker_size_select">
-        <% @sizes.each do |size|%>
-          <option value="<%= size.size_number %>"><%= size.size_number %></option>
-        <% end %>
-      </select>
+    <h5>Select US <%= @sneaker.gender %> sizes:</h5>
 
-      <button type="submit" class="btn btn-primary my-1 sneaker_size_button">ADD TO CART</button>
-    </form>
+    <%# Runs through our session variable array of hashes to find all sneaker ids and if found displays the remove button%>
+
+    <%sneaker_ids = []%>
+
+    <%session[:shopping_cart].each do |item|%>
+      <% sneaker_ids.push(item["id"]) %>
+    <% end %>
+
+    <% if sneaker_ids.include?(@sneaker.id)%>
+      <%= button_to cart_path(@sneaker.id), method: :delete do %>
+        Remove from Cart
+      <% end %>
+    <% else %>
+      <%= form_with url: cart_index_path, method: :POST do %>
+        <%= hidden_field_tag(:id, @sneaker.id)%>
+
+        <%= select_tag(:sneaker_size, options_from_collection_for_select(@sizes, "size_number", "size_number"), :class => "sneaker_size_select")%>
+
+        <%= button_tag('Add to Cart', :class => "btn btn-primary my-1 sneaker_size_button")%>
+      <% end %>
+    <% end %>
 
     <hr>
 
