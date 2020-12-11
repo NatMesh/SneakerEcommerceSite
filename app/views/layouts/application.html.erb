@@ -85,6 +85,7 @@
                 <% if session[:shopping_cart].present? %>
                   <% session[:shopping_cart].each do |item|%>
                     <%sneaker = Sneaker.find(item["id"])%>
+                    <%sneaker_current = item%>
                     <div class="dropdown-item ">
                       <div class="row">
                         <div class="col-3">
@@ -103,7 +104,7 @@
                           <br>
                           <br>
                           <br>
-                          <%= link_to 'REMOVE', cart_path(sneaker), method: :delete %>
+                          <%= button_to 'REMOVE', cart_path(sneaker), params: {sneaker_size: item["size"]}, method: :delete %>
                         </div>
                       </div>
                       <hr>
@@ -120,7 +121,7 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 
-      <%= debug session[:shopping_cart] %>
+      <%# <%= debug session[:shopping_cart] %>
 
 
 

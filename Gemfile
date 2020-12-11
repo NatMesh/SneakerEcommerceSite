@@ -32,6 +32,9 @@ gem 'activeadmin' #Admin Dashboard as a Rails Engine
 gem 'devise' #Username and Password Authentication Library
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'bootstrap4' #gives us styling compatible with bootstrap4
 
+gem 'rubocop'
+gem 'rubocop-rails'
+
 gem 'kaminari'
 
 gem 'stripe'

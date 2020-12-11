@@ -1,9 +1,10 @@
 class CartController < ApplicationController
-  #POST /cart
-  #Data sent as form data (params)
+  # POST /cart
+  # Data sent as form data (params)
   def create
-    #Add params[:id] to cart.
-    logger.debug("Adding #{params[:id]} and #{params[:sneaker_size]} to the cart")
+    # Add params[:id] to cart.
+    # logger.debug("Adding #{params[:id]} and #{params[:sneaker_size]} to the cart")
+    logger.debug(params.to_s)
     id = params[:id].to_i
     size = params[:sneaker_size].to_f
     quantity = params[:quantity].to_i
@@ -13,33 +14,35 @@ class CartController < ApplicationController
     does_not_exists_in_session = true
 
     session[:shopping_cart].each do |item|
-      if item["id"] == id && item["size"] == size
-        item["quantity"] += quantity
-        does_not_exists_in_session = false
-        break
-      end
+      next unless item["id"] == id && item["size"] == size
+
+      item["quantity"] += quantity
+      does_not_exists_in_session = false
+      break
     end
 
     if does_not_exists_in_session
-      session[:shopping_cart] << {"id": id, "size": size, "quantity": quantity}
+      session[:shopping_cart] << { "id": id, "size": size, "quantity": quantity }
     end
 
-    #session[:shopping_cart] << {"id": id, "size": size, "quantity": 1} unless session[:shopping_cart][][]
+    # session[:shopping_cart] << {"id": id, "size": size, "quantity": 1} unless session[:shopping_cart][][]
     redirect_to root_path
   end
 
-  #DELETE /cart/:id
+  # DELETE /cart/:id
   def destroy
-    #Remove params[:id] from the cart
+    # Remove params[:id] from the cart
     id = params[:id].to_i
+    size = params[:sneaker_size].to_f
     sneaker = Sneaker.find(id)
-    flash[:notice] = "#{sneaker.name} was removed from cart."
+
     session[:shopping_cart].each do |item|
-      if item["id"] == id
+      if item["id"] == id && item["size"] == size
         session[:shopping_cart].delete(item)
         break
       end
     end
+    flash[:notice] = "#{sneaker.name} was removed from cart."
     redirect_to root_path
   end
 end

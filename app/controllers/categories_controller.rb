@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    #Fetches all the sneakers that belong to the category we chose
+    # Fetches all the sneakers that belong to the category we chose
     @category = Category.find(params[:id])
     @sneakers = Category.find(params[:id]).sneakers.page params[:page]
   end
