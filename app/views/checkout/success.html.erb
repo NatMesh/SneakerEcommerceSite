@@ -1,0 +1,17 @@
+<h1>Successful Order, thank you for shopping!</h1>
+
+
+<% order = Order.create(
+      customer_id:      @customer.id,
+      total_price:      @payment_intent["amount"],
+      shipping_address: @customer.address,
+      order_address:    @customer.address,
+      order_email:     @customer.email,
+      order_status:    @session["payment_status"],
+      stripe_order_id: @payment_intent["id"],
+      provincial_sales_tax:   @customer.province.provincial_sales_tax,
+      goods_and_services_tax: @customer.province.goods_and_services_tax,
+      harmonized_sales_tax:   @customer.province.harmonized_sales_tax
+) %>
+
+<%session[:shopping_cart].clear%>

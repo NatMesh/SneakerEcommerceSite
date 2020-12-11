@@ -110,6 +110,10 @@
                       <hr>
                     </div>
                   <% end %>
+                  <%= form_with url: checkout_create_path, remote: true do %>
+                    <%= hidden_field_tag(:user_cart, session[:shopping_cart], autocomplete: "off") %>
+                    <%= button_tag 'CHECKOUT', class: "sneaker_size_button checkout-button" %>
+                  <% end %>
                 <% end %>
               </div>
             </li>
