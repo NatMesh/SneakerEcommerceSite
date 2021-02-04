@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :customers
   devise_for :users
-  root to: "home#index"
+  root to: "sneakers#index"
   resources :sneakers, only: %i[index show]
   resources :brands, only: %i[index show]
   resources :designers, only: %i[index show]
