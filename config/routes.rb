@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :customers
   devise_for :users
   root to: "sneakers#index"
-  resources :sneakers, only: %i[index show]
+  resources :sneakers, only: %i[index show] do
+    collection do
+      get "search"
+    end
+  end
   resources :brands, only: %i[index show]
   resources :designers, only: %i[index show]
   resources :categories, only: %i[index show]
