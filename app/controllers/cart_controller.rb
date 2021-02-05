@@ -9,7 +9,7 @@ class CartController < ApplicationController
     size = params[:sneaker_size].to_f
     quantity = params[:quantity].to_i
     sneaker = Sneaker.find(id)
-    flash[:notice] = "#{quantity} #{sneaker.name} size #{size} were added to cart."
+    flash[:success] = "#{quantity} #{sneaker.name} size #{size} were added to cart."
 
     does_not_exists_in_session = true
 
@@ -42,7 +42,7 @@ class CartController < ApplicationController
         break
       end
     end
-    flash[:notice] = "#{sneaker.name} was removed from cart."
+    flash[:success] = "#{sneaker.name} was removed from cart."
     redirect_to root_path
   end
 end

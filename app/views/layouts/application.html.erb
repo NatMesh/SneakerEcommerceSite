@@ -127,8 +127,10 @@
         </div>
       </nav>
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <%# Renders our flash messages with correct bootstrap stylings %>
+      <% flash.each do |name, msg|%>
+        <div class="alert alert-<%= name %>"><%= msg %></div>
+      <% end %>
 
       <%# <%= debug session[:shopping_cart] %>
 
