@@ -4,10 +4,10 @@ class CheckoutController < ApplicationController
   def create
 
     #confirm if user is signed in before being able to make purchase
-    if  !(customer_signed_in?)
-      flash[:notice] = "Must be signed in to go to checkout menu!"
-      redirect_to root_path
-    end
+    # if  !(customer_signed_in?)
+    #   flash[:notice] = "Must be signed in to go to checkout menu!"
+    #   redirect_to root_path
+    # end
 
     #Load up the product the user wishes to purchases from the Sneaker model
 
